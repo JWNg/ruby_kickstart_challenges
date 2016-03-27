@@ -24,3 +24,6 @@ def odds_and_evens(string, return_odds)
   end
   new_string
 end
+
+#odds_and_evens("abcdefg",true)    # => "bdf"
+#odds_and_evens("abcdefg",false)   # => "aceg"
