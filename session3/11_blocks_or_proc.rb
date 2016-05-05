@@ -32,7 +32,7 @@
 
 
 def array_init(n = 5, &block)
-  block ||= Proc.new{|i| (i*100).to_s}
+  block ||= Proc.new{|i| (i*100)}
   Array.new(n, &block)  
 end
 
@@ -41,4 +41,3 @@ p array_init { |i| i.to_s }
 p array_init 2   
 p array_init 
 p array_init { 'hi' }
-
