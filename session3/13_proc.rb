@@ -52,5 +52,20 @@
 #   end
 # end       # => ["a", "m", "r", 1, 3, 4, 9, 2.5, 9.0, 25.8]
 
-def your_sort
+def your_sort(list, &block)
+  block ||= Proc.new{|first, second| first <=> second }
+  loop = 0
+  while loop < list.length-1 do
+    placement = 0
+    while placement < list.length-1 do
+      if block.call(list[placement], list[placement+1]) < 1
+        placement +=1
+      else 
+        list[placement], list[placement+1] = list[placement+1], list[placement]
+        placement+=1
+      end
+    end
+    loop +=1 
+  end
+  list  
 end
