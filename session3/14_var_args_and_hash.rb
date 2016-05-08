@@ -21,11 +21,47 @@
 # problem_14 2,   5, 6, 45, 99, 13, 5, 6,  :problem => :same_ends    # => true
 # problem_14 3,   5, 6, 45, 99, 13, 5, 6,  :problem => :same_ends    # => false
 
-def problem_14
+def problem_14(*arg)
+
+  problem = arg.pop[:problem] if arg.last.class == Hash
+  problem ||= :count_clumps
+
+  return count_clumps(arg) if problem == :count_clumps
+  return same_ends(arg) if problem == :same_ends
 end
 
-def same_ends
+def same_ends(*list)
+
+  size = list.shift
+  front = list[0..size-1]
+  back = list[(0-size)..-1]
+
+  front == back ? true : false
 end
 
-def count_clumps
+def count_clumps(*list)
+  count = 0
+  list = list[0] if list.size == 1
+  list.each_with_index do|item, index|
+    if index == list.size-1
+
+      next
+    elsif item == list[index+1]
+
+      if index == 0
+        count += 1
+      elsif item == list[index-1]
+        next
+      else
+        count += 1
+      end
+    end
+  end
+  count
 end
+
+#p problem_14( 2, 5, 6, 45, 99, 13, 5, 6, :problem => :same_ends)
+#p problem_14 1,   5, 6, 45, 99, 13, 5, 6,  :problem => :same_ends    # => true
+#p problem_14 3,   5, 6, 45, 99, 13, 5, 6,  :problem => :same_ends
+# 
+p problem_14 1, 2, 2, 3, 4, 4,    :problem => :count_clumps    # => 1
