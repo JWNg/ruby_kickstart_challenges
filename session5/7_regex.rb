@@ -33,4 +33,6 @@
 #
 
 def tree_parser(trees)
+  trees.scan(/(^.*)[,|;].*(\d.*\d.+),.*(\D\d*.\d\d)/)
 end
+
